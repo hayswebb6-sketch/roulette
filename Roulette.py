@@ -114,6 +114,8 @@ def roulette():
      <h1>ROULETTE</h1>
      
      <h2>Balance: {balance}$</h2>
+
+     <h2>Casino winnings: {total_lost}$</h2>
     
      
      <form action="/" method="get">
