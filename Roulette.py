@@ -36,7 +36,7 @@ def roulette():
             result="<h1>You're just a dirty hacker, aren't you?-sans</h1>"
             balance-=balance
            
-        elif user_bet<=0:
+        elif user_bet<0:
             result="<h1>Yeah, get outta here-sans</h1>"
             balance-=balance
             
@@ -45,7 +45,7 @@ def roulette():
         
             if roulette_number==user_guess:
                 result="<h1>YOU WON</h1>"
-                balance+=user_bet
+                balance += 35 * user_bet
             else:
                 result="<h2>YOU LOST</h2>"
                 balance-=user_bet
@@ -228,5 +228,6 @@ def sans():
     return """
     <p>It's a beautiful day outside. Birds are singing, flowers are blooming... On days like these, kids like you... Should be burning in hell.</p>
     """
-app.run(host="0.0.0.0", port=5001)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)
 
