@@ -26,7 +26,7 @@ def roulette():
         return f"""
         <meta http-equiv="refresh" content="5;url=/reset">
         <h1>TAKE 1000 MORE DOLLARS FROM THE BANK</h1>
-        <h2>WE AT THE CASINO LOVE GETTING {total_lost}$ EVERY DAY!</h2>
+        <h2>WE AT THE CASINO LOVE GETTING {total_lost}$ FROM YOU EVERY DAY!</h2>
         """
     
     if not user_guess:
