@@ -17,6 +17,13 @@ def roulette():
         
     
     balance=session["balance"]
+
+    if balance <= 0:
+        return f"""
+        <meta http-equiv="refresh" content="5;url=reset">
+        <h1>TAKE 1000 MORE DOLLARS FROM THE BANK</h1>
+        <h2>WE AT THE CASINO LOVE GETTING {balance}$ EVERY DAY!</h2>
+        """
     
     if not user_guess:
         result=""
