@@ -57,7 +57,7 @@ def roulette():
             if roulette_number==user_guess:
                 result="<h1>YOU WON</h1>"
                 balance += 35 * user_bet
-                session["total_lost"] -= 35 * user_bet
+                session["total_lost"] -=user_bet
             else:
                 result="<h2>YOU LOST</h2>"
                 balance-=user_bet
@@ -114,8 +114,6 @@ def roulette():
      <h1>ROULETTE</h1>
      
      <h2>Balance: {balance}$</h2>
-
-     <h2>Casino winnings: {total_lost}$</h2>
     
      
      <form action="/" method="get">
