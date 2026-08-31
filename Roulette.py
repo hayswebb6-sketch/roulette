@@ -17,7 +17,7 @@ def roulette():
     if "total_lost" not in session:
         session["total_lost"]=0
     if "total_lost" not in session:
-        session["total_lost"]=10000
+        session["total_balance"]=10000
         
         
     
