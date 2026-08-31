@@ -16,17 +16,21 @@ def roulette():
         session["balance"]=1000
     if "total_lost" not in session:
         session["total_lost"]=0
+    if "total_lost" not in session:
+        session["total_lost"]=10000
         
         
     
     balance=session["balance"]
     total_lost=session["total_lost"]
+    total_balance=session["total_balance"]
    
     if balance <= 0:
         return f"""
         <meta http-equiv="refresh" content="5;url=/reset">
         <h1>TAKE 1000 MORE DOLLARS FROM THE BANK</h1>
         <h2>WE AT THE CASINO LOVE GETTING {total_lost}$ FROM YOU EVERY DAY!</h2>
+        <h3>Current money in your bank account: {total_balance}$</h3>
         """
     
     if not user_guess:
@@ -58,10 +62,12 @@ def roulette():
                 result="<h1>YOU WON</h1>"
                 balance += 35 * user_bet
                 session["total_lost"] -=user_bet
+                session["total_balance"] += user_bet
             else:
                 result="<h2>YOU LOST</h2>"
                 balance-=user_bet
                 session["total_lost"] += user_bet
+                session["total_balance"] -= user_bet
             result += f""" 
                  <h1>Your number:{user_guess}</h1>
                  <h1>Number rolled: {roulette_number}</h1>
