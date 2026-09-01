@@ -40,7 +40,7 @@ def roulette():
     elif not user_bet:
         result="<h2>Please enter a bet sir</h2>"
     
-     else:
+    else:
         try:
             user_bet=int(user_bet)
         except ValueError:
