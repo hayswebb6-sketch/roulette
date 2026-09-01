@@ -11,6 +11,7 @@ app.secret_key=secrets.token_hex(32)
 def roulette():
     user_guess=request.args.get("guess")
     user_bet=request.args.get("bet")
+    bet_type=request.args.get("bet_type")
     
     if "balance" not in session:                          
         session["balance"]=1000
@@ -33,45 +34,105 @@ def roulette():
         <h3>Current money in your bank account: {total_balance}$</h3>
         """
     
-    if not user_guess:
-        result=""
+    if bet_type=="number" and user_guess is None:
+        result="Please enter a number sir"
  
     elif not user_bet:
         result="<h2>Please enter a bet sir</h2>"
+    
+     else:
+        try:
+            user_bet=int(user_bet)
+        except ValueError:
+            user_bet=-1
         
-    else:
-        user_guess=int(user_guess)
-        user_bet=int(user_bet)
+        if bet_type=="number":
+            try:
+                user_guess=int(user_guess)
+            except ValueError:
+                user_guess=-1
             
-        if user_guess < 0 or user_guess > 36:
+        if user_bet>balance:
+            result="<h1>You're just a dirty hacker, aren't you?-sans</h1>"
+            balance-=balance
+        elif user_bet<0:
+            result="<h1>Yeah, get out of here-sans</h1>"
+            balance-=balance
+        elif bet_type=="number" and (
+            user_guess is None or user_guess < 0 or user_guess > 36
+        ): 
             result="<h1>You didn't do anything at all, did you?-sans</h1>"
             balance-=0.25*balance
             
-        elif user_bet>balance:
-            result="<h1>You're just a dirty hacker, aren't you?-sans</h1>"
-            balance-=balance
-           
-        elif user_bet<0:
-            result="<h1>Yeah, get outta here-sans</h1>"
-            balance-=balance
-            
         else:
             roulette_number=random.randint(0,36)
-        
-            if roulette_number==user_guess:
+
+
+            red_numbers=[
+                1,3,5,7,9,
+                12,14,16,18,
+                19,21,23,25,27,
+                30,32,34,36
+            ]
+            black_numbers=[
+                2,4,6,8,10,
+                11,13,15,17,
+                20,22,24,26,28,
+                29,31,33,35
+            ]
+            if roulette_number==0:
+                color="GREEN"
+            elif roulette_number in red_numbers:
+                color="RED"
+            else:
+                color="BLACK"
+
+            if bet_type=="number":
+                won = roulette_number == user_guess
+                payout=35
+            elif bet_type=="red":
+                won = roulette_number in red_numbers
+                payout=1
+            elif bet_type=="black":
+                won = roulette_number in black_numbers
+                payout=1
+            elif bet_type=="green":
+                won = roulette_number == 0
+                payout=35
+            elif bet_type=="high":
+                won = 19 <= roulette_number <=36
+                payout=1
+            elif bet_type=="low":
+                won = 1 <= roulette_number <= 18
+                payout=1
+            else:
+                payout=0
+                won=False              
+            if won:
                 result="<h1>YOU WON</h1>"
-                balance += 35 * user_bet
+               
+                balance += payout * user_bet
+                
                 session["total_lost"] -=user_bet
                 session["total_balance"] += user_bet
             else:
                 result="<h2>YOU LOST</h2>"
+                
                 balance-=user_bet
+                
                 session["total_lost"] += user_bet
                 session["total_balance"] -= user_bet
             result += f""" 
-                 <h1>Your number:{user_guess}</h1>
+                 <h1>Bet type: {bet_type}</h1>
+                 <h1>Your number: {user_guess}</h1>
                  <h1>Number rolled: {roulette_number}</h1>
+                 <h1>Color: {color}<h1>
                  """
+            if bet_type=="number":
+                result += f"""
+                <h1>Your number: {user_guess}</h1>
+                """
+            
             session["balance"]=balance    
     return  f"""
     <style>
@@ -123,6 +184,21 @@ def roulette():
     
      
      <form action="/" method="get">
+
+
+         <h2>Bet Type</h2>
+
+         <select name="bet_type">
+             <option value="number">Number</option>
+             <option value="red">Red</option>
+             <option value="black">Black</option>
+             <option value="green">Green</option>
+             <option value="high">High</option>
+             <option value="low">Low</option>
+         </select>
+
+        <br><br>
+         
          <h2>Pick a number</h2>
          
          <input type="number" name="guess" min="0" max="36">
