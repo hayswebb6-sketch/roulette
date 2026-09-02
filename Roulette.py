@@ -176,8 +176,31 @@ def roulette():
                box-shadow: 0 0 15px white;
                border: 2px solid black;
                     }}
+        select {{
+
+              background-color: Black;
+              color: white;
+              border-radius: 10px;
+              padding: 15px 15px;
+              font-size: 13px;
+              transition: 0.75s;
+              border: 2px solid black;
+              box-shadow: 0 0 15px red;
+              font-family: Trebuchet MS;
+                  }}
+        select:hover {{
+
+               background-color: red;
+               color: white;
+               transform: scale(1.2);
+               box-shadow: 0 0 15px white;
+               border: 2px solid black;
+               cursor: pointer;
+                   }} 
+        select:focus {{
+                box-shadow: 0 0 30px red;
      </style>
-     
+                                    
      <h1>ROULETTE</h1>
      
      <h2>Balance: {balance}$</h2>
