@@ -380,6 +380,11 @@ def lose():
     </a>
     """
     
-
+@app.route("/emu")
+def emu():
+    return """
+    <img src="/static/emu.png" style="width: 100%; height: auto;">
+    """
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
