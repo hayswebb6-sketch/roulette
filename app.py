@@ -18,10 +18,13 @@ def roulette():
         session["total_lost"] = 0
     if "total_balance" not in session:
         session["total_balance"] = 10000
-
     balance = session["balance"]
     total_lost = session["total_lost"]
     total_balance = session["total_balance"]
+
+    if total_balance<=0:
+        session["lose"]=True
+        return redirect("/lose")
 
     if balance <= 0:
         return f"""
@@ -113,7 +116,7 @@ def roulette():
 
     return f"""
     <head>
-        <link rel="icon" type="image/png" href="static/favicon.png">
+        <link rel="icon" type="image/png" href="/static/favicon.png">
     </head>
     <style>
         body {{
@@ -205,7 +208,10 @@ def roulette():
 
 @app.route("/reset")
 def reset():
+    session["total_balance"] = 10000
+    session["total_lost"] = 0
     session["balance"] = 1000
+    session["lose"] = False
     return redirect("/")
 
 
@@ -242,7 +248,7 @@ def bankrupt():
 @app.route("/goat")
 def goat():
     return """
-    <img src="static/goat.png" style="width: 100%; height: auto;">
+    <img src="/static/goat.png" style="width: 100%; height: auto;">
     """
 
 
@@ -290,7 +296,31 @@ def sans():
     return """
     <p>It's a beautiful day outside. Birds are singing, flowers are blooming... On days like these, kids like you... Should be burning in hell.</p>
     """
-
+@app.route("/lose")
+def lose():
+    if not session.get("lose"):
+        return "STOP TRYING TO LOSE", 403
+    return """
+    <style>
+    h1 {
+            font-size: 50px;
+            font-family: atop-font;
+            box-shadow: 0 0 15px red;
+    }
+    h2 {
+            font-size: 50px;
+            font-family: atop-font;
+            box-shadow: 0 0 15px red;
+    }
+    </style>
+            
+    
+    <h1>YOU LOST</h1>
+    <a
+    href="/reset"><h2>You happen to get 11,000 more dollars in the mail from a mysterious person, and decide to go to the casino to play roulette</h2>
+    </a>
+    """
+    
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
