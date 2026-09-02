@@ -25,6 +25,29 @@ def roulette():
     if total_balance<=0:
         session["lose"]=True
         return redirect("/lose")
+    if balance <= 0:
+        return f"""
+    <style>
+    body {{
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }}
+    h1 {{
+            font-family: atop-font;
+            padding: 15px
+    }}
+    h2 {{
+            font-family: atop-font;
+            padding: 10px
+    }}
+    </style>
+    <meta http-equiv="refresh" content="5;url=/reset">
+    <h1>TAKE 1000 MORE DOLLARS FROM YOUR BANK ACCOUNT</h1>
+    <h2>SO FAR, YOU'VE LOST {total_lost}$ TO GAMBLING!</h2>
+    <h3>Current money in your bank account: {total_balance}$</h3>
+    """
 
     if bet_type == "number" and user_guess is None:
         result = "Please enter a number sir"
@@ -304,11 +327,11 @@ def lose():
     
     h1 {
             font-family: atop-font;
-            padding: 15px
+            padding: 15px;
     }
     h2 {
             font-family: atop-font;
-            padding: 10px
+            padding: 10px;
     }
     </style>
             
