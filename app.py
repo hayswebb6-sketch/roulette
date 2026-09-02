@@ -112,6 +112,9 @@ def roulette():
             session["balance"] = balance
 
     return f"""
+    <head>
+        <link rel="icon" type="image/png" href="static/favicon.png">
+    </head>
     <style>
         body {{
             background-color: black;
