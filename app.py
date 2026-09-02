@@ -242,7 +242,7 @@ def bankrupt():
 @app.route("/goat")
 def goat():
     return """
-    <img src="/static/goat.png" style="width: 100%; height: auto;">
+    <img src="static/goat.png" style="width: 100%; height: auto;">
     """
 
 
