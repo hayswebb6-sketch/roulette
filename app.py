@@ -36,11 +36,13 @@ def roulette():
         }}
     h1 {{
             font-family: atop-font;
-            padding: 15px
+            padding: 5px;
+            font-size: 40px;
     }}
     h2 {{
             font-family: atop-font;
-            padding: 10px
+            padding: 10px;
+            font-size: 40px;
     }}
     </style>
     <meta http-equiv="refresh" content="5;url=/reset">
