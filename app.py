@@ -290,6 +290,24 @@ def ypdamin():
             return redirect("/ypdamin")
 
     return """
+    <style>
+    body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }
+            
+    
+    h1 {
+            font-family: atop-font;
+            padding: 15px;
+    }
+    h2 {
+            font-family: atop-font;
+            padding: 10px;
+    }
+    </style>
     <form method="post">
         <input type="password" name="code">
         <button type="submit" name="submit">ENTER</button>
@@ -311,6 +329,24 @@ def admin():
 @app.route("/sans")
 def sans():
     return """
+    <style>
+    body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }
+            
+    
+    h1 {
+            font-family: atop-font;
+            padding: 15px;
+    }
+    h2 {
+            font-family: atop-font;
+            padding: 10px;
+    }
+    </style>
     <p>It's a beautiful day outside. Birds are singing, flowers are blooming... On days like these, kids like you... Should be burning in hell.</p>
     """
 @app.route("/lose")
