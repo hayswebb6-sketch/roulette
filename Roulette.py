@@ -178,8 +178,8 @@ def roulette():
                     }}
         select {{
 
-              background-color: Black;
-              color: white;
+              background-color: Red;
+              color: black;
               border-radius: 10px;
               padding: 15px 15px;
               font-size: 13px;
