@@ -45,7 +45,7 @@ def roulette():
             font-size: 40px;
     }}
     </style>
-    <meta http-equiv="refresh" content="5;url=/reset">
+    <meta http-equiv="refresh" content="5;url=/">
     <h1>TAKE 1000 MORE DOLLARS FROM YOUR BANK ACCOUNT</h1>
     <h2>SO FAR, YOU'VE LOST {total_lost}$ TO GAMBLING!</h2>
     <h3>Current money in your bank account: {total_balance}$</h3>
