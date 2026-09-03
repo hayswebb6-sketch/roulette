@@ -388,14 +388,14 @@ def lottery():
     elif "total_lost" not in session:
         session["total_lost"] = 0
     
-    session["balance"]=balance
+    balance=session["balance"]
     
-    elif roulette_number==0:
+    if roulette_number==0:
         session["balance"] += payout
         result="<h1>YOU WON THE LOTTERY!!!</h1>"
     else:
         session["balance"]=0
-        session["total_lost"]=balance
+        session["total_lost"] += balance
         result= """
         <h1>YOU LOST</h1>
         <h5>YOU ALSO LOST ALL OF YOUR MONEY</h5>
@@ -430,7 +430,9 @@ def lottery():
 def random_money():     
      if "balance" not in session:
          session["balance"]=1000    
+     
      session["balance"]=random.randint(0,5000)
+     
      return redirect("/")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
