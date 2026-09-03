@@ -385,11 +385,17 @@ def lottery():
     payout=100000
     if "balance" not in session:
         session["balance"]=1000
-    if roulette_number==0:
+    elif "total_lost" not in session:
+        session["total_lost"] = 0
+    
+    session["balance"]=balance
+    
+    elif roulette_number==0:
         session["balance"] += payout
         result="<h1>YOU WON THE LOTTERY!!!</h1>"
     else:
         session["balance"]=0
+        session["total_lost"]=balance
         result= """
         <h1>YOU LOST</h1>
         <h5>YOU ALSO LOST ALL OF YOUR MONEY</h5>
