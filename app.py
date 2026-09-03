@@ -423,8 +423,8 @@ def lottery():
 @app.route("/random_money")
 def random_money():     
      if "balance" not in session:
-        session["balance"]=1000    
-    session["balance"]=random.randint(0,5000)
-    return redirect("/")
+         session["balance"]=1000    
+     session["balance"]=random.randint(0,5000)
+     return redirect("/")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
