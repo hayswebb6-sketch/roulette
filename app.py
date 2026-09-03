@@ -327,8 +327,25 @@ def admin():
         return "STOP HACKING", 403
 
     return """
+    <style>
+    body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }
+            
+    
+    h1 {
+            font-family: atop-font;
+            padding: 15px;
+    }
+    h2 {
+            font-family: atop-font;
+            padding: 10px;
+    }
     <h1>ADMIN PANEL</h1>
-    <p>I don't know how you made it here, but it's a work in progress.</p>
+    <p></p>
     """
 
 
