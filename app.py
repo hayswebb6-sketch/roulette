@@ -237,13 +237,6 @@ def no_money():
     session["balance"] = 0
     return redirect("/")
 
-
-@app.route("/jackpot")
-def jackpot():
-    session["balance"] = 100000000
-    return redirect("/")
-
-
 @app.route("/double")
 def double():
     session["balance"] *= 2
@@ -385,6 +378,53 @@ def emu():
     return """
     <img src="/static/emu.png" style="width: 100%; height: auto;">
     """
+
+@app.route("/lottery")
+def lottery():    
+    roulette_number=random.randint(0,100)
+    payout=100000
+    if "balance" not in session:
+        session["balance"]=1000
+    if roulette_number==0:
+        session["balance"] += payout
+        result="<h1>YOU WON THE LOTTERY!!!</h1>"
+    else:
+        session["balance"]=0
+        result= """
+        <h1>YOU LOST</h1>
+        <h5>YOU ALSO LOST ALL OF YOUR MONEY</h5>
+        """
+    return f"""
+    <style>
+    body {{
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }}
+            
     
+    h1 {{
+            font-family: atop-font;
+            padding: 15px;
+            text-size: 50px;
+    }}
+    h2 {{
+            font-family: atop-font;
+            padding: 10px;
+    }}
+    </style>
+    {result}
+    <button
+        onclick="location.href='/'">PRESS TO GO BACK TO HOME PAGE
+    </button>
+    """   
+
+@app.route("/random_money")
+def random_money():     
+     if "balance" not in session:
+        session["balance"]=1000    
+    session["balance"]=random.randint(0,5000)
+    return redirect("/")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
