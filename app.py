@@ -18,13 +18,15 @@ def roulette():
         session["total_lost"] = 0
     if "total_balance" not in session:
         session["total_balance"] = 10000
+
     balance = session["balance"]
     total_lost = session["total_lost"]
     total_balance = session["total_balance"]
 
-    if total_balance<=0:
-        session["lose"]=True
+    if total_balance <= 0:
+        session["lose"] = True
         return redirect("/lose")
+
     if balance <= 0:
         return f"""
     <style>
@@ -45,7 +47,9 @@ def roulette():
             font-size: 40px;
     }}
     </style>
+
     <meta http-equiv="refresh" content="5;url=/">
+
     <h1>TAKE 1000 MORE DOLLARS FROM YOUR BANK ACCOUNT</h1>
     <h2>SO FAR, YOU'VE LOST {total_lost}$ TO GAMBLING!</h2>
     <h3>Current money in your bank account: {total_balance}$</h3>
@@ -53,8 +57,10 @@ def roulette():
 
     if bet_type == "number" and user_guess is None:
         result = "Please enter a number sir"
+
     elif not user_bet:
         result = "<h2>Please enter a bet sir</h2>"
+
     else:
         try:
             user_bet = int(user_bet)
@@ -70,17 +76,29 @@ def roulette():
         if user_bet > balance:
             result = "<h1>You're just a dirty hacker, aren't you?-sans</h1>"
             balance -= balance
+
         elif user_bet < 0:
             result = "<h1>Yeah, get out of here-sans</h1>"
             balance -= balance
-        elif bet_type == "number" and (user_guess is None or user_guess < 0 or user_guess > 36):
+
+        elif bet_type == "number" and (
+            user_guess is None or user_guess < 0 or user_guess > 36
+        ):
             result = "<h1>You didn't do anything at all, did you?-sans</h1>"
             balance -= 0.25 * balance
+
         else:
             roulette_number = random.randint(0, 36)
 
-            red_numbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
-            black_numbers = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+            red_numbers = [
+                1, 3, 5, 7, 9, 12, 14, 16, 18,
+                19, 21, 23, 25, 27, 30, 32, 34, 36
+            ]
+
+            black_numbers = [
+                2, 4, 6, 8, 10, 11, 13, 15, 17,
+                20, 22, 24, 26, 28, 29, 31, 33, 35
+            ]
 
             if roulette_number == 0:
                 color = "GREEN"
@@ -92,32 +110,41 @@ def roulette():
             if bet_type == "number":
                 won = roulette_number == user_guess
                 payout = 35
+
             elif bet_type == "red":
                 won = roulette_number in red_numbers
                 payout = 1
+
             elif bet_type == "black":
                 won = roulette_number in black_numbers
                 payout = 1
+
             elif bet_type == "green":
                 won = roulette_number == 0
                 payout = 35
+
             elif bet_type == "high":
                 won = 19 <= roulette_number <= 36
                 payout = 1
+
             elif bet_type == "low":
                 won = 1 <= roulette_number <= 18
                 payout = 1
+
             else:
                 payout = 0
                 won = False
 
             if won:
                 result = "<h1>YOU WON</h1>"
+
                 balance += payout * user_bet
                 session["total_lost"] -= user_bet
                 session["total_balance"] += user_bet
+
             else:
                 result = "<h2>YOU LOST</h2>"
+
                 balance -= user_bet
                 session["total_lost"] += user_bet
                 session["total_balance"] -= user_bet
@@ -135,6 +162,7 @@ def roulette():
     <head>
         <link rel="icon" type="image/png" href="/static/favicon.png">
     </head>
+
     <style>
         body {{
             background-color: black;
@@ -142,14 +170,17 @@ def roulette():
             text-align: center;
             font-family: Sans-serif;
         }}
+
         h1 {{
             font-size: 50px;
             font-family: atop-font;
         }}
+
         h2 {{
             font-size: 40px;
             font-family: "Courier New";
         }}
+
         button {{
             background-color: Black;
             color: white;
@@ -161,6 +192,7 @@ def roulette():
             box-shadow: 0 0 15px red;
             font-family: Trebuchet MS;
         }}
+
         button:hover {{
             background-color: red;
             color: white;
@@ -168,6 +200,7 @@ def roulette():
             box-shadow: 0 0 15px white;
             border: 2px solid black;
         }}
+
         select {{
             background-color: Red;
             color: black;
@@ -179,6 +212,7 @@ def roulette():
             box-shadow: 0 0 15px red;
             font-family: Trebuchet MS;
         }}
+
         select:hover {{
             background-color: red;
             color: white;
@@ -187,17 +221,21 @@ def roulette():
             border: 2px solid black;
             cursor: pointer;
         }}
+
         select:focus {{
             box-shadow: 0 0 30px red;
         }}
+
         option[value="red"] {{
             background-color: red;
             color: white;
         }}
+
         option[value="black"] {{
             background-color: black;
             color: white;
         }}
+
         option[value="green"] {{
             background-color: green;
             color: white;
@@ -208,7 +246,9 @@ def roulette():
     <h2>Balance: {balance}$</h2>
 
     <form action="/" method="get">
+
         <h2>Bet Type</h2>
+
         <select name="bet_type">
             <option value="number">Number</option>
             <option value="red">Red</option>
@@ -217,18 +257,35 @@ def roulette():
             <option value="high">High</option>
             <option value="low">Low</option>
         </select>
-            
+
         <br><br>
+
         <h2>Pick a number</h2>
+
         <input type="number" name="guess" min="0" max="36">
 
         <br><br>
+
         <h2>Bet an amount of money</h2>
-        <label for="bet">Bet: $<span id="betValue">100</span></label>
-        <input type="range" id="bet" name="bet" min="1" max="{max(1, int(balance))}" value="100" oninput="document.getElementById('betValue').textContent=this.value">
+
+        <label for="bet">
+            Bet: $<span id="betValue">100</span>
+        </label>
+
+        <input
+            type="range"
+            id="bet"
+            name="bet"
+            min="1"
+            max="{max(1, int(balance))}"
+            value="100"
+            oninput="document.getElementById('betValue').textContent=this.value"
+        >
 
         <br><br>
+
         <button type="submit">ROLL</button>
+
     </form>
 
     {result}
@@ -241,23 +298,28 @@ def reset():
     session["total_lost"] = 0
     session["balance"] = 1000
     session["lose"] = False
+
     return redirect("/")
 
 
 @app.route("/no_money")
 def no_money():
     session["balance"] = 0
+
     return redirect("/")
+
 
 @app.route("/double")
 def double():
     session["balance"] *= 2
+
     return redirect("/")
 
 
 @app.route("/half")
 def half():
     session["balance"] /= 2
+
     return redirect("/")
 
 
@@ -265,6 +327,7 @@ def half():
 def bankrupt():
     session["balance"] = 0
     session["total_balance"] = 0
+
     return redirect("/")
 
 
@@ -277,16 +340,20 @@ def goat():
 
 @app.route("/ypdamin", methods=["GET", "POST"])
 def ypdamin():
+
     if "failed_attempts" not in session:
         session["failed_attempts"] = 0
 
     if request.method == "POST":
+
         code = request.form.get("code")
 
         if code == "152014":
             session["admin"] = True
             session["failed_attempts"] = 0
+
             return redirect("/admin")
+
         else:
             session["failed_attempts"] += 1
 
@@ -298,22 +365,23 @@ def ypdamin():
     return """
     <style>
     body {
-            background-color: black;
-            color: red;
-            text-align: center;
-            font-family: Sans-serif;
-        }
-            
-    
-    h1 {
-            font-family: atop-font;
-            padding: 15px;
+        background-color: black;
+        color: red;
+        text-align: center;
+        font-family: Sans-serif;
     }
+
+    h1 {
+        font-family: atop-font;
+        padding: 15px;
+    }
+
     h2 {
-            font-family: atop-font;
-            padding: 10px;
+        font-family: atop-font;
+        padding: 10px;
     }
     </style>
+
     <form method="post">
         <input type="password" name="code">
         <button type="submit" name="submit">ENTER</button>
@@ -321,31 +389,151 @@ def ypdamin():
     """
 
 
-@app.route("/admin")
+@app.route("/admin", methods=["GET", "POST"])
 def admin():
-    if not session.get("admin"):
-        return "STOP HACKING", 403
 
-    return """
-    <style>
-    body {
+    if "balance" not in session:
+        session["balance"] = 1000
+
+    if not session.get("admin"):
+        return """
+        <style>
+        body {
             background-color: black;
             color: red;
             text-align: center;
             font-family: Sans-serif;
         }
-            
-    
-    h1 {
+
+        h1 {
             font-family: atop-font;
             padding: 15px;
-    }
-    h2 {
+        }
+
+        h2 {
             font-family: atop-font;
             padding: 10px;
-    }
+        }
+        </style>
+
+        <h1>STOP HACKING, 403</h1>
+        """, 403
+
+    if request.method == "POST":
+
+        balance_set = request.form.get("balance_set")
+
+        try:
+            session["balance"] = int(balance_set)
+        except (ValueError, TypeError):
+            pass
+
+    return f"""
+    <style>
+    body {{
+        background-color: black;
+        color: red;
+        text-align: center;
+        font-family: Sans-serif;
+    }}
+
+    h1 {{
+        font-family: atop-font;
+        padding: 15px;
+    }}
+
+    h2 {{
+        font-family: atop-font;
+        padding: 10px;
+    }}
+
+    a {{
+        color: red;
+    }}
+
+    input {{
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid red;
+    }}
+
+    button {{
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 13px;
+        border: 2px solid black;
+        box-shadow: 0 0 15px red;
+        font-family: Trebuchet MS;
+    }}
+
+    button:hover {{
+        background-color: red;
+        color: white;
+        cursor: pointer;
+    }}
+    </style>
+
     <h1>ADMIN PANEL</h1>
-    <p></p>
+
+    <h2>All routes</h2>
+
+    <a href="/"><h2>Main Site</h2></a>
+
+    <a href="/reset"><h2>Reset</h2></a>
+
+    <a href="/goat"><h2>Goat</h2></a>
+
+    <a href="/emu"><h2>Emu</h2></a>
+
+    <a href="/double">
+        <h2>Double money and send back to main site</h2>
+    </a>
+
+    <a href="/half">
+        <h2>Divides money by 2 and sends back to main site</h2>
+    </a>
+
+    <a href="/no_money">
+        <h2>Makes JUST CURRENT BALANCE, not bank account balance go to 0</h2>
+    </a>
+
+    <a href="/bankrupt">
+        <h2>Makes all balances, including bank account balance go to 0</h2>
+    </a>
+
+    <a href="/lottery">
+        <h2>1 in 100 chance for you to get 1 billion dollars. If you lose, you also lose all of your money</h2>
+    </a>
+
+    <a href="/random_money">
+        <h2>Makes your money go anywhere from 0 to 5000</h2>
+    </a>
+
+    <a href="/sans">
+        <h2>A message from sans shows up</h2>
+    </a>
+
+    <h2>Balance Setter</h2>
+
+    <form method="post">
+
+        <input
+            type="number"
+            name="balance_set"
+            min="0"
+        >
+
+        <button type="submit">SET BALANCE</button>
+
+    </form>
+
+    <h2>Current balance: {session["balance"]}$</h2>
+
+    <h2>Auto Win/Auto Lose</h2>
+
+    <h1>Work in progress</h1>
     """
 
 
@@ -354,135 +542,167 @@ def sans():
     return """
     <style>
     body {
-            background-color: black;
-            color: red;
-            text-align: center;
-            font-family: Sans-serif;
-        }
-            
-    
-    h1 {
-            font-family: atop-font;
-            padding: 15px;
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-family: Sans-serif;
     }
+
+    h1 {
+        font-family: atop-font;
+        padding: 15px;
+    }
+
     h2 {
-            font-family: atop-font;
-            padding: 10px;
+        font-family: atop-font;
+        padding: 10px;
     }
     </style>
-    <p>It's a beautiful day outside. Birds are singing, flowers are blooming... On days like these, kids like you... Should be burning in hell.</p>
+
+    <p>
+    It's a beautiful day outside.
+    Birds are singing, flowers are blooming...
+    On days like these, kids like you...
+    Should be burning in hell.
+    </p>
     """
+
+
 @app.route("/lose")
 def lose():
+
     if not session.get("lose"):
         return """
         <style>
-    body {
+        body {
             background-color: black;
             color: red;
             text-align: center;
             font-family: Sans-serif;
         }
-            
-    
-    h1 {
+
+        h1 {
             font-family: atop-font;
             padding: 15px;
             text-size: 50px;
-    }
-    h2 {
+        }
+
+        h2 {
             font-family: atop-font;
             padding: 10px;
-    }
-    </style>
-        STOP TRYING TO LOSE""", 403
+        }
+        </style>
+
+        STOP TRYING TO LOSE
+        """, 403
+
     return """
     <style>
     body {
-            background-color: black;
-            color: red;
-            text-align: center;
-            font-family: Sans-serif;
-        }
-            
-    
-    h1 {
-            font-family: atop-font;
-            padding: 15px;
+        background-color: black;
+        color: red;
+        text-align: center;
+        font-family: Sans-serif;
     }
+
+    h1 {
+        font-family: atop-font;
+        padding: 15px;
+    }
+
     h2 {
-            font-family: atop-font;
-            padding: 10px;
+        font-family: atop-font;
+        padding: 10px;
     }
     </style>
-            
-    
+
     <h1>YOU LOST</h1>
-    <a
-    href="/reset"><h2>You happen to get 11,000 more dollars in the mail from a mysterious person, and decide to go to the casino to play roulette</h2>
+
+    <a href="/reset">
+        <h2>
+        You happen to get 11,000 more dollars in the mail from a mysterious
+        person, and decide to go to the casino to play roulette
+        </h2>
     </a>
     """
-    
+
+
 @app.route("/emu")
 def emu():
     return """
     <img src="/static/emu.png" style="width: 100%; height: auto;">
     """
 
+
 @app.route("/lottery")
-def lottery():    
-    roulette_number=random.randint(0,100)
-    payout=100000
+def lottery():
+
+    roulette_number = random.randint(0, 100)
+    payout = 1000000000
+
     if "balance" not in session:
-        session["balance"]=1000
-    elif "total_lost" not in session:
+        session["balance"] = 1000
+
+    if "total_lost" not in session:
         session["total_lost"] = 0
-    
-    balance=session["balance"]
-    
-    if roulette_number==0:
+
+    balance = session["balance"]
+
+    if roulette_number == 0:
+
         session["balance"] += payout
-        result="<h1>YOU WON THE LOTTERY!!!</h1>"
+
+        result = "<h1>YOU WON THE LOTTERY!!!</h1>"
+
     else:
-        session["balance"]=0
+
+        session["balance"] = 0
         session["total_lost"] += balance
-        result= """
+
+        result = """
         <h1>YOU LOST</h1>
         <h5>YOU ALSO LOST ALL OF YOUR MONEY</h5>
         """
+
     return f"""
     <style>
     body {{
-            background-color: black;
-            color: red;
-            text-align: center;
-            font-family: Sans-serif;
-        }}
-            
-    
-    h1 {{
-            font-family: atop-font;
-            padding: 15px;
-            text-size: 50px;
+        background-color: black;
+        color: red;
+        text-align: center;
+        font-family: Sans-serif;
     }}
+
+    h1 {{
+        font-family: atop-font;
+        padding: 15px;
+        text-size: 50px;
+    }}
+
     h2 {{
-            font-family: atop-font;
-            padding: 10px;
+        font-family: atop-font;
+        padding: 10px;
     }}
     </style>
+
     {result}
-    <button
-        onclick="location.href='/'">PRESS TO GO BACK TO HOME PAGE
+
+    <button onclick="location.href='/'">
+        PRESS TO GO BACK TO HOME PAGE
     </button>
-    """   
+    """
+
 
 @app.route("/random_money")
-def random_money():     
-     if "balance" not in session:
-         session["balance"]=1000    
-     
-     session["balance"]=random.randint(0,5000)
-     
-     return redirect("/")
+def random_money():
+
+    if "balance" not in session:
+        session["balance"] = 1000
+
+    session["balance"] = random.randint(0, 5000)
+
+    return redirect("/")
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
