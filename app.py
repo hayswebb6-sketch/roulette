@@ -190,6 +190,18 @@ def roulette():
         select:focus {{
             box-shadow: 0 0 30px red;
         }}
+        option[value="red"] {{
+            background-color: red;
+            color: white;
+        }}
+        option[value="black"] {{
+            background-color: black;
+            color: white;
+        }}
+        option[value="green"] {{
+            background-color: green;
+            color: white;
+        }}
     </style>
 
     <h1>ROULETTE</h1>
@@ -205,7 +217,7 @@ def roulette():
             <option value="high">High</option>
             <option value="low">Low</option>
         </select>
-
+            
         <br><br>
         <h2>Pick a number</h2>
         <input type="number" name="guess" min="0" max="36">
