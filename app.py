@@ -394,7 +394,10 @@ def admin():
 
     if "balance" not in session:
         session["balance"] = 1000
-
+    
+    if "total_balance" not in session:
+        session["total_balance"] = 10000
+    
     if not session.get("admin"):
         return """
         <style>
@@ -420,14 +423,18 @@ def admin():
         """, 403
 
     if request.method == "POST":
-
         balance_set = request.form.get("balance_set")
+        total_balance_set = request.form.get("bank_account_set")
 
         try:
             session["balance"] = int(balance_set)
         except (ValueError, TypeError):
             pass
 
+        try:
+            session["total_balance"] = int(total_balance_set)
+        except (ValueError, TypeError):
+            pass
     return f"""
     <style>
     body {{
@@ -515,7 +522,7 @@ def admin():
         <h2>A message from sans shows up</h2>
     </a>
 
-    <h2>Balance Setter</h2>
+    <h2>Balance Setter™</h2>
 
     <form method="post">
 
@@ -528,12 +535,21 @@ def admin():
         <button type="submit">SET BALANCE</button>
 
     </form>
+    <h2>Bank Account Setter™</h2>
+    <form method="post">
 
-    <h2>Current balance: {session["balance"]}$</h2>
+        <input
+            type="number"
+            name="bank_account_set"
+            min="0"
+        >
 
-    <h2>Auto Win/Auto Lose</h2>
+        <button type="submit">STEAL SOME MONEY FROM THE BANK</button>
 
-    <h1>Work in progress</h1>
+    </form>
+
+
+    <h2>Current money in bank account: {session["total_balance"]}$</h2>
     """
 
 
