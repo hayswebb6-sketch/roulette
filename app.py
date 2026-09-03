@@ -1,9 +1,10 @@
 from flask import Flask, request, session, redirect
 import secrets
 import random
+import os
 
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(32)
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 @app.route("/")
@@ -318,7 +319,7 @@ def double():
 
 @app.route("/half")
 def half():
-    session["balance"] /= 2
+    session["balance"] //= 2
 
     return redirect("/")
 
@@ -348,7 +349,7 @@ def ypdamin():
 
         code = request.form.get("code")
 
-        if code == "152014":
+        if code ==os.environ.get("ADMIN_CODE"):
             session["admin"] = True
             session["failed_attempts"] = 0
 
@@ -600,7 +601,7 @@ def lose():
         h1 {
             font-family: atop-font;
             padding: 15px;
-            text-size: 50px;
+            font-size: 50px;
         }
 
         h2 {
@@ -692,7 +693,7 @@ def lottery():
     h1 {{
         font-family: atop-font;
         padding: 15px;
-        text-size: 50px;
+        font-size: 50px;
     }}
 
     h2 {{
