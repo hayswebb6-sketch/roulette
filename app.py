@@ -264,6 +264,7 @@ def half():
 @app.route("/bankrupt")
 def bankrupt():
     session["balance"] = 0
+    session["total_balance"] = 0
     return redirect("/")
 
 
@@ -357,7 +358,27 @@ def sans():
 @app.route("/lose")
 def lose():
     if not session.get("lose"):
-        return "STOP TRYING TO LOSE", 403
+        return """
+        <style>
+    body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }
+            
+    
+    h1 {
+            font-family: atop-font;
+            padding: 15px;
+            text-size: 50px;
+    }
+    h2 {
+            font-family: atop-font;
+            padding: 10px;
+    }
+    </style>
+        STOP TRYING TO LOSE""", 403
     return """
     <style>
     body {
