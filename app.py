@@ -140,7 +140,7 @@ def roulette():
                 result = "<h1>YOU WON</h1>"
 
                 balance += payout * user_bet
-                session["total_lost"] -= 35 * user_bet
+                session["total_lost"] -= user_bet
                 session["total_balance"] += user_bet
 
             else:
