@@ -49,7 +49,7 @@ def roulette():
     }}
     </style>
 
-    <meta http-equiv="refresh" content="5;url=/redirect">
+    <meta http-equiv="refresh" content="5;url=/code_redirect">
 
     <h1>TAKE 1000 MORE DOLLARS FROM YOUR BANK ACCOUNT</h1>
     <h2>SO FAR, YOU'VE LOST {total_lost}$ TO GAMBLING!</h2>
