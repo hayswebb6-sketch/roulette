@@ -140,7 +140,7 @@ def roulette():
                 result = "<h1>YOU WON</h1>"
 
                 balance += payout * user_bet
-                session["total_lost"] -= user_bet
+                session["total_lost"] -= 35 * user_bet
                 session["total_balance"] += user_bet
 
             else:
@@ -747,6 +747,12 @@ def random_money():
 
 @app.route("/code_redirect")
 def code_redirect():
-    return redirect("/")
+    if session["total_balance"] >= 1000:
+        session["balance"] = 1000
+        session["total_balance"] -= 1000
+        return redirect("/")
+    else:
+        session["lose"]=True
+        return redirect("/lose")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
