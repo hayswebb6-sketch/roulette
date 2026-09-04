@@ -295,7 +295,7 @@ def roulette():
 
 @app.route("/reset")
 def reset():
-    session["total_balance"] = 10000
+    session["total_balance"] = 11000
     session["total_lost"] = 0
     session["balance"] = 1000
     session["lose"] = False
