@@ -312,6 +312,30 @@ def no_money():
 
 @app.route("/double")
 def double():
+    if not session.get("admin"):
+        return """
+        <style>
+        body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }
+
+        h1 {
+            font-family: atop-font;
+            padding: 15px;
+        }
+
+        h2 {
+            font-family: atop-font;
+            padding: 10px;
+        }
+        </style>
+
+        <h1>GET SOME SKILL, 403</h1>
+        """
+
     session["balance"] *= 2
 
     return redirect("/")
@@ -420,8 +444,8 @@ def admin():
         }
         </style>
 
-        <h1>STOP HACKING, 403</h1>
-        """, 403
+        <h1>GET SOME SKILL, 403</h1>
+        """
 
     if request.method == "POST":
         balance_set = request.form.get("balance_set")
