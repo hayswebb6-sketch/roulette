@@ -745,8 +745,8 @@ def random_money():
 
     return redirect("/")
 
-@app.route("/redirect")
-def redirect():
+@app.route("/code_redirect")
+def code_redirect():
     return redirect("/")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
