@@ -49,7 +49,7 @@ def roulette():
     }}
     </style>
 
-    <meta http-equiv="refresh" content="5;url=/">
+    <meta http-equiv="refresh" content="5;url=/redirect">
 
     <h1>TAKE 1000 MORE DOLLARS FROM YOUR BANK ACCOUNT</h1>
     <h2>SO FAR, YOU'VE LOST {total_lost}$ TO GAMBLING!</h2>
@@ -745,6 +745,8 @@ def random_money():
 
     return redirect("/")
 
-
+@app.route("/redirect")
+def redirect():
+    return redirect("/")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
