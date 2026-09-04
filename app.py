@@ -606,6 +606,7 @@ def sans():
     On days like these, kids like you...
     Should be burning in hell.
     </p>
+    <img src="/static/sans.png" style="width: 100%; height: auto;">
     """
 
 
