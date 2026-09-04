@@ -333,8 +333,8 @@ def double():
         }
         </style>
 
-        <h1>GET SOME SKILL, 403</h1>
-        """
+        <h1>GET SOME SKILL</h1>
+        """,403
 
     session["balance"] *= 2
 
@@ -444,8 +444,8 @@ def admin():
         }
         </style>
 
-        <h1>GET SOME SKILL, 403</h1>
-        """
+        <h1>GET SOME SKILL</h1>
+        """, 403
 
     if request.method == "POST":
         balance_set = request.form.get("balance_set")
@@ -634,7 +634,7 @@ def lose():
         }
         </style>
 
-        STOP TRYING TO LOSE
+        <h1>STOP TRYING TO LOSE</h1>
         """, 403
 
     return """
