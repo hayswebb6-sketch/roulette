@@ -582,6 +582,7 @@ def admin():
         >
 
         <button type="submit">SET BALANCE</button>
+        <h2>Current balance: {session["balance"]}$</h2>
 
     </form>
     <h2>Bank Account Setter™</h2>
