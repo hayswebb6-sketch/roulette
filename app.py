@@ -533,42 +533,42 @@ def admin():
 
     <h1>ADMIN PANEL</h1>
 
-    <h2>All routes</h2>
+    <h2>All routes:</h2>
 
-    <a href="/"><h2>Main Site</h2></a>
+    <a href="/"><p>Main Site</p></a>
 
-    <a href="/reset"><h2>Reset</h2></a>
+    <a href="/reset"><p>Reset</p></a>
 
-    <a href="/goat"><h2>Goat</h2></a>
+    <a href="/goat"><p>Goat</p></a>
 
-    <a href="/emu"><h2>Emu</h2></a>
+    <a href="/emu"><p>Emu</p></a>
 
     <a href="/double">
-        <h2>Double money and send back to main site</h2>
+        <p>Double money and send back to main site</p>
     </a>
 
     <a href="/half">
-        <h2>Divides money by 2 and sends back to main site</h2>
+        <p>Divides money by 2 and sends back to main site</p>
     </a>
 
     <a href="/no_money">
-        <h2>Makes JUST CURRENT BALANCE, not bank account balance go to 0</h2>
+        <p>Makes JUST CURRENT BALANCE, not bank account balance go to 0</p>
     </a>
 
     <a href="/bankrupt">
-        <h2>Makes all balances, including bank account balance go to 0</h2>
+        <p>Makes all balances, including bank account balance go to 0</p>
     </a>
 
     <a href="/lottery">
-        <h2>1 in 100 chance for you to get 1 billion dollars. If you lose, you also lose all of your money</h2>
+        <p>1 in 100 chance for you to get 1 billion dollars. If you lose, you also lose all of your money</p>
     </a>
 
     <a href="/random_money">
-        <h2>Makes your money go anywhere from 0 to 5000</h2>
+        <p>Makes your money go anywhere from 0 to 5000</p>
     </a>
 
     <a href="/sans">
-        <h2>A message from sans shows up</h2>
+        <p>A message from sans shows up</p>
     </a>
 
     <h2>Balance Setter™</h2>
