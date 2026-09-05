@@ -295,6 +295,30 @@ def roulette():
 
 @app.route("/reset")
 def reset():
+    if not session.get("admin") and not session.get("lose"):
+        return """
+        <style>
+        body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Sans-serif;
+        }
+
+        h1 {
+            font-family: atop-font;
+            padding: 15px;
+        }
+
+        h2 {
+            font-family: atop-font;
+            padding: 10px;
+        }
+        </style>
+
+        <h1>CAN ONLY RESET WITH ULTRA ADMIN POWERS</h1>
+        <h6>OR LOSING SO MUCH THAT PEOPLE GIVE YOU MONEY</h6>
+        """,403
     session["total_balance"] = 11000
     session["total_lost"] = 0
     session["balance"] = 1000
