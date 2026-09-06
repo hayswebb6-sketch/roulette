@@ -1,5 +1,4 @@
 from flask import Flask, request, session, redirect
-import secrets
 import random
 import os
 
