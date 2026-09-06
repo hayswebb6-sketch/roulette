@@ -161,6 +161,7 @@ def roulette():
     return f"""
     <head>
         <link rel="icon" type="image/png" href="/static/favicon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.png">
     </head>
 
     <style>
