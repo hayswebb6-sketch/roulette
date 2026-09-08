@@ -486,7 +486,7 @@ def admin():
             pass
     return f"""
     <head>
-       <link rel="icon" type="image/png" href="/static/admin_favicon.png"> 
+       <link rel="icon" type="image/jpg" href="/static/admin_favicon.jpg"> 
     </head>
     
     <style>
