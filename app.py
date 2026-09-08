@@ -485,6 +485,10 @@ def admin():
         except (ValueError, TypeError):
             pass
     return f"""
+    <head>
+       <link rel="icon" type="image/png" href="/static/admin_favicon.png"> 
+    </head>
+    
     <style>
     body {{
         background-color: black;
