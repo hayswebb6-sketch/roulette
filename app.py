@@ -486,7 +486,8 @@ def admin():
             pass
     return f"""
     <head>
-       <link rel="icon" type="image/jpg" href="/static/admin_favicon.jpg"> 
+       <link rel="icon" type="image/jpg" href="/static/admin_favicon.jpg">
+       <link rel="apple-touch-icon" sizes="180x180" href="/static/admin_favicon.jpg">
     </head>
     
     <style>
